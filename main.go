@@ -100,6 +100,8 @@ func loadConfig() (*config, error) {
 	viper.SetConfigType("json")
 	viper.AddConfigPath(".")
 	viper.AddConfigPath("./bin")
+	viper.AddConfigPath("../bin")
+	viper.AddConfigPath("/Users/Jeffery.Annor/Documents/iot-central-industrial-OEE/bin/")
 
 	viper.AutomaticEnv()
 	if err := viper.ReadInConfig(); err != nil {

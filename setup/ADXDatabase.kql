@@ -1,2 +1,47 @@
 
 .create-merge table boltmaker (messageTimestamp:datetime, deviceId:string, plantName:string, productionLine:string, shiftNumber:long, batchNumber:long, totalPartsMade:long, defectivePartsMade:long, temperature:real, oilLevel:real, machineHealth:string) 
+
+
+{"id":"53532955-f0b9-4716-a73b-c3c915868572","title":"Quality",
+"query":"boltmaker\n| where plantName == (['PlantName'])\n| where productionLine == (['ProductionLine']) \n|
+where shiftNumber == (['ShiftNumber'])\n| where messageTimestamp between (['_startTime'] .. ['_endTime']) \n|
+summarize totalPartsMade = sum(round(totalPartsMade,2)), defectivePartsMade = sum(round(defectivePartsMade,2))\n|
+extend Quality = iff(totalPartsMade>0,(totalPartsMade -  defectivePartsMade)*100/totalPartsMade,0.00)  \n|
+project round(Quality,2)\n| project strcat(tostring(Quality), \"%\") ;"
+,"dataSourceId":"a02cb359-5c59-494a-83f1-f1f944765ab6","visualType":"card","pageId":"ad90b412-c0d6-47b5-a71d-91f423dfcbc8","layout":{"x":5,"y":0,"width":5,"height":3},"visualOptions":{"hideTileTitle":false,"multiStat__textSize":"large","multiStat__valueColumn":{"type":"infer"},"colorRulesDisabled":false,"colorRules":[{"id":"da10bbb3-7603-4733-ab8e-7eb149016c39","column":{"type":"infer"},"conditions":[{"operator":"<","value":"90"}],"color":"red","indicator":{"kind":"text","text":{"type":"infer"}}},{"id":"b2fc84c0-8f73-4559-99a0-8291e365b910","column":{"type":"infer"},"conditions":[{"operator":">","value":"90"}],"color":"green","indicator":{"kind":"text","text":{"type":"infer"}}}],"colorStyle":"light"},"usedParamVariables":["PlantName","ProductionLine","ShiftNumber","_startTime","_endTime"]},
+
+
+{"id":"399928fb-0ae8-4323-a245-1f2715e2cc92","title":"Performance"
+,"query":"let healthcalc = boltmaker\n| where plantName == (['PlantName'])\n| where productionLine == (['ProductionLine']) \n|
+ where shiftNumber == (['ShiftNumber'])\n| where messageTimestamp between (['_startTime'] .. ['_endTime']) \n|
+  where machineHealth == 'Healthy'\n| count |extend CommonCol=\"Dummy\"   \n| project CommonCol, healthcount = Count; \n
+  let warningcalc = boltmaker\n| where plantName == (['PlantName'])\n| where productionLine == (['ProductionLine']) \n
+  | where shiftNumber == (['ShiftNumber'])\n| where messageTimestamp between (['_startTime'] .. ['_endTime']) \n|
+   where machineHealth == 'Warning'\n| count |extend CommonCol=\"Dummy\"   \n| project CommonCol, warningcount = Count; \n
+   let errorcalc = boltmaker\n| where plantName == (['PlantName'])\n| where productionLine == (['ProductionLine']) \n|
+    where shiftNumber == (['ShiftNumber'])\n| where messageTimestamp between (['_startTime'] .. ['_endTime']) \n|
+    where machineHealth == 'Error'\n| count |extend CommonCol=\"Dummy\"   \n| project CommonCol, errorcount = Count; \n
+    healthcalc  \n| join warningcalc on CommonCol | join errorcalc on CommonCol  \n|
+    project performance = iff((healthcount + warningcount + errorcount)>0,round((healthcount*100/(healthcount + warningcount + errorcount)),2),0.00)\n|
+    project strcat(tostring(performance), \"%\") ;\n",
+    "dataSourceId":"a02cb359-5c59-494a-83f1-f1f944765ab6","visualType":"card","pageId":"ad90b412-c0d6-47b5-a71d-91f423dfcbc8","layout":{"x":10,"y":0,"width":5,"height":3},"visualOptions":{"hideTileTitle":false,"multiStat__textSize":"large","multiStat__valueColumn":{"type":"infer"},"colorRulesDisabled":false,"colorRules":[{"id":"da10bbb3-7603-4733-ab8e-7eb149016c39","column":{"type":"infer"},"conditions":[{"operator":"<","value":"90"}],"color":"red","indicator":{"kind":"text","text":{"type":"infer"}}},{"id":"b2fc84c0-8f73-4559-99a0-8291e365b910","column":{"type":"infer"},"conditions":[{"operator":">","value":"90"}],"color":"green","indicator":{"kind":"text","text":{"type":"infer"}}}],"colorStyle":"light"},"usedParamVariables":["PlantName","ProductionLine","ShiftNumber","_startTime","_endTime"]},
+
+{"id":"5659ce06-3abc-4767-ba69-0d3df24cf247","title":"OEE",
+"query":"let healthcalc = boltmaker\n| where plantName == (['PlantName'])\n| where productionLine == (['ProductionLine']) \n
+| where shiftNumber == (['ShiftNumber'])\n| where messageTimestamp between (['_startTime'] .. ['_endTime']) \n
+| where machineHealth == 'Healthy'\n| count |extend CommonCol=\"Dummy\"   \n| project CommonCol, healthcount = Count; \n
+let errorcalc = boltmaker\n| where plantName == (['PlantName'])\n| where productionLine == (['ProductionLine']) \n
+| where shiftNumber == (['ShiftNumber'])\n| where messageTimestamp between (['_startTime'] .. ['_endTime']) \n|
+where machineHealth == 'Error'\n| count |extend CommonCol=\"Dummy\"   \n| project CommonCol, errorcount = Count; \n
+let warningcalc = boltmaker\n| where plantName == (['PlantName'])\n| where productionLine == (['ProductionLine']) \n|
+where shiftNumber == (['ShiftNumber'])\n| where messageTimestamp between (['_startTime'] .. ['_endTime']) \n|
+where machineHealth == 'Warning'\n| count |extend CommonCol=\"Dummy\"   \n| project CommonCol, warningcount = Count; \n
+let qualitycalc = boltmaker\n| where plantName == (['PlantName'])\n| where productionLine == (['ProductionLine']) \n|
+where shiftNumber == (['ShiftNumber'])\n| where messageTimestamp between (['_startTime'] .. ['_endTime']) \n|
+summarize totalPartsMade = sum(round(totalPartsMade,2)), defectivePartsMade = sum(round(defectivePartsMade,2))\n|
+extend Quality = iff(totalPartsMade>0,(totalPartsMade -  defectivePartsMade)*100/totalPartsMade,0.00)  \n|
+extend CommonCol=\"Dummy\"   \n| project CommonCol, Quality ;\nhealthcalc   \n| join warningcalc on CommonCol\n|
+join errorcalc on CommonCol\n| join qualitycalc on CommonCol\n| extend Availability = (healthcount -  errorcount)*100/healthcount  \n
+| extend Performance = iff((healthcount + warningcount + errorcount)>0,round(healthcount*100/(healthcount + warningcount + errorcount),2),0.00)\n
+| extend OEE = (Performance+Quality+Availability)/3\n| project strcat(tostring(round(OEE,2)), \"%\");  \n",
+"dataSourceId":"a02cb359-5c59-494a-83f1-f1f944765ab6","visualType":"card","pageId":"ad90b412-c0d6-47b5-a71d-91f423dfcbc8","layout":{"x":0,"y":0,"width":5,"height":6},"visualOptions":{"hideTileTitle":false,"multiStat__textSize":"auto","multiStat__valueColumn":{"type":"infer"},"colorRulesDisabled":false,"colorRules":[{"id":"da10bbb3-7603-4733-ab8e-7eb149016c39","column":{"type":"infer"},"conditions":[{"operator":"<","value":"90"}],"color":"red","indicator":{"kind":"text","text":{"type":"infer"}}},{"id":"b2fc84c0-8f73-4559-99a0-8291e365b910","column":{"type":"infer"},"conditions":[{"operator":">","value":"90"}],"color":"green","indicator":{"kind":"text","text":{"type":"infer"}}}],"colorStyle":"bold"},"usedParamVariables":["PlantName","ProductionLine","ShiftNumber","_startTime","_endTime"]}

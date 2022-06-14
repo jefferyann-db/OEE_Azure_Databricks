@@ -46,7 +46,7 @@ type (
 		telemetryWaitContext        context.Context
 		telemetryWaitCancel         context.CancelFunc
 		reportedWaitContext         context.Context
-		reportedWaitCancel          context.CancelFunc
+reportedWaitCancel          context.CancelFuncF
 	}
 )
 

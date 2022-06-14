@@ -1,10 +1,10 @@
 [
   {
-    "@id": "dtmi:parnellAerospace:BoltMakerV1;1",
+    "@id": "dtmi:jeferyTest:BoltMakerV1;1",
     "@type": "Interface",
     "contents": [
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:plantName;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:plantName;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "PlantName"
@@ -13,7 +13,7 @@
         "schema": "string"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:productionLine;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:productionLine;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "Production Line"
@@ -22,7 +22,7 @@
         "schema": "string"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:shiftNumber;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:shiftNumber;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "ShiftNumber"
@@ -31,7 +31,7 @@
         "schema": "integer"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:batchNumber;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:batchNumber;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "Batch Number"
@@ -40,7 +40,7 @@
         "schema": "integer"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:messageTimestamp;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:messageTimestamp;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "MessageTimestamp"
@@ -49,7 +49,7 @@
         "schema": "dateTime"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:totalPartsMade;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:totalPartsMade;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "Total Parts Made"
@@ -58,7 +58,7 @@
         "schema": "integer"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:defectivePartsMade;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:defectivePartsMade;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "Defective Parts Made"
@@ -67,7 +67,7 @@
         "schema": "integer"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:oilLevel;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:oilLevel;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "Oil Level"
@@ -76,7 +76,7 @@
         "schema": "double"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:isMachineOn;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:isMachineOn;1",
         "@type": "Property",
         "displayName": {
           "en": "Is Machine On"
@@ -86,7 +86,7 @@
         "writable": true
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:telemetryFrequency;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:telemetryFrequency;1",
         "@type": "Property",
         "displayName": {
           "en": "Telemetry Frequency (Secs)"
@@ -96,7 +96,7 @@
         "writable": true
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:shiftDurationHours;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:shiftDurationHours;1",
         "@type": "Property",
         "displayName": {
           "en": "Shift Duration (Hours)"
@@ -106,7 +106,7 @@
         "writable": true
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:batchDurationHours;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:batchDurationHours;1",
         "@type": "Property",
         "displayName": {
           "en": "Batch Duration (Hours)"
@@ -116,7 +116,7 @@
         "writable": true
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:hostName;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:hostName;1",
         "@type": "Property",
         "displayName": {
           "en": "HostName"
@@ -126,7 +126,7 @@
         "writable": false
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:ipAddress;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:ipAddress;1",
         "@type": "Property",
         "displayName": {
           "en": "IPAddress"
@@ -136,7 +136,7 @@
         "writable": false
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:hostTime;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:hostTime;1",
         "@type": "Property",
         "displayName": {
           "en": "HostTime"
@@ -146,7 +146,7 @@
         "writable": false
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:machineHealth;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:machineHealth;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "Machine Health"
@@ -155,7 +155,7 @@
         "schema": "string"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:temperature;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:temperature;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "Temperature"
@@ -164,7 +164,7 @@
         "schema": "double"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:cpuLoad;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:cpuLoad;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "CPU Load"
@@ -173,7 +173,7 @@
         "schema": "double"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:systemDiskUsedPercent;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:systemDiskUsedPercent;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "System Disk Used Percent"
@@ -182,7 +182,7 @@
         "schema": "integer"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:systemDiskFreePercent;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:systemDiskFreePercent;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "System Disk Free Percent"
@@ -191,7 +191,7 @@
         "schema": "integer"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:memoryUsed;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:memoryUsed;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "Memory Used"
@@ -200,7 +200,7 @@
         "schema": "long"
       },
       {
-        "@id": "dtmi:parnellAerospace:BoltMakerV1:memoryFree;1",
+        "@id": "dtmi:jeferyTest:BoltMakerV1:memoryFree;1",
         "@type": "Telemetry",
         "displayName": {
           "en": "Memory Free"

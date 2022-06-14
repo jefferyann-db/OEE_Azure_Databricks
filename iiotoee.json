@@ -1,0 +1,35 @@
+{
+    "logger": {
+      "logLevel": "Debug",
+      "logsDir": "./logs"
+    },
+    "application": {
+      "provisioningUrl": "global.azure-devices-provisioning.net",
+      "idScope": "0ne005ACFE2",
+      "masterKey": "NwcMjF/1SNgBawN3RMcixxmZgqoaSKUrjtg4tVDe/X1pIV0gnDXi9SK4FUoJrlU9kOwaxek4lTWGIRLQ6ROhPQ==",
+      "boltMachineModelID": "dtmi:jeferyTest:BoltMakerV1;1"
+    },
+    "plant": [
+      {
+        "name": "Everett",
+        "boltMachine":{
+          "count": 2,
+          "format": "json"
+        }
+      },
+      {
+        "name": "Austin",
+        "boltMachine":{
+          "count": 1,
+          "format": "json"
+        }
+      },
+      {
+        "name": "Atlanta",
+        "boltMachine":{
+          "count": 1,
+          "format": "json"
+        }
+      }
+    ]
+  }

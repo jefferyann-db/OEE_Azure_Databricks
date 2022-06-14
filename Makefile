@@ -17,6 +17,7 @@ clean:												## Clean all binaries
 	$(GOCLEAN)
 	rm -f $(BINARY_WINDOWS)
 	rm -f $(BINARY_LINUX)
+	rm -f $(BINARY_DARWIN)
 
 # Cross compilation
 build-windows:										## Build binary for windows
